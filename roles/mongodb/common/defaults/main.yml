@@ -1,0 +1,9 @@
+---
+# 認証機能を使用
+mongodb_enable_auth: false
+
+# 認証シークレット
+mongodb_auth_secret: 'abcdefghijklmnopqrstuvwxyz'
+
+# proxy environment
+proxy_env: {}

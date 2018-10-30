@@ -1,0 +1,13 @@
+---
+galaxy_info:
+  author: ANTC
+  description: ulimit
+  company: NEC Corporation
+  platforms:
+    - name: EL
+      versions:
+        - all
+  galaxy_tags:
+    - system
+dependencies: []
+

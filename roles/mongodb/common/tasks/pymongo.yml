@@ -1,0 +1,22 @@
+---
+- name: ensure install wget
+  yum: name=wget state=present
+
+# python-setuptools をインストールする
+# ディストリビューション付属の python-setuptools は古いため、最新版を入れる
+#- name: install latest python setuptools
+#  shell: wget https://bootstrap.pypa.io/ez_setup.py -O - | python
+#  args:
+#    creates: /usr/bin/easy_install
+
+# pip をインストールする
+- name: install pip
+  shell: wget https://bootstrap.pypa.io/get-pip.py -O - | python
+  args:
+    creates: /usr/bin/pip
+  environment: "{{ proxy_env }}"
+
+# pymongo をインストールする
+- name: install pymongo
+  #easy_install: name=pymongo
+  pip: name=pymongo state=present

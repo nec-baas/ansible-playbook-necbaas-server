@@ -1,0 +1,7 @@
+---
+# Proxy
+#setproxy_url: "http://proxy.example.com:3128"
+
+#proxy_env:
+#  http_proxy: "{{ setproxy_url }}"
+#  https_proxy: "{{ setproxy_url }}"

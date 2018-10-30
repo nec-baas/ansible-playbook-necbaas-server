@@ -1,0 +1,8 @@
+# MongoDB
+---
+- hosts: mongodb
+  become: yes
+
+  roles:
+    - role: system/disable_thp
+    - role: mongodb/mongod

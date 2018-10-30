@@ -1,0 +1,18 @@
+---
+# APIサーバの外部向けURL
+#baas_server_api_base_uri: 'http://localhost:8080/api/'
+
+# APIサーバ 内部向けベースURI 設定 （省略時は baas_server_api_base_uri の値が使用される）
+#baas_server_api_internal_base_uri: ''
+
+# 接続MongoDBサーバ。デフォルトは 'localhost:27017'。レプリカセット時はカンマ区切りで３台。
+#baas_server_mongodb_servers: 'localhost:27017'
+
+# MongoDB認証有効化
+#baas_server_mongodb_enable_auth: False
+
+# MongoDB 認証ユーザ名
+#baas_server_mongodb_auth_user: ''
+
+# MongoDB 認証パスワード
+#baas_server_mongodb_auth_password: ''

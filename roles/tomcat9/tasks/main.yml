@@ -1,0 +1,84 @@
+---
+- name: ensure download dir
+  file: path=/opt/download state=directory
+
+- name: create tomcat group
+  group: name=tomcat
+
+- name: create tomcat user
+  user: name=tomcat group=tomcat createhome=no shell=/bin/bash
+
+### Tomcat tarball をダウンロードする
+- name: download tomcat9
+  get_url: url={{ tomcat9_url }} dest=/opt/download/{{ tomcat9_tarball }}
+
+### tarball を展開
+- name: unarchive tomcat9
+  unarchive: src="/opt/download/{{ tomcat9_tarball }}" dest=/opt copy=no owner=tomcat group=tomcat creates="/opt/{{ tomcat9_basename }}"
+  environment:
+    LC_ALL: "C"
+
+- name: symlink tomcat9
+  file: src="/opt/{{ tomcat9_basename }}" dest=/opt/tomcat9 state=link force=yes
+
+### webapps ディレクトリを作成し、シンボリックリンクを張る
+- name: create webapps dir
+  file: path=/var/lib/tomcat9/webapps state=directory owner=tomcat group=tomcat
+
+- name: stat webapps dir
+  stat: path=/opt/tomcat9/webapps
+  register: st
+
+- name: delete old webapps dir
+  file: path=/opt/tomcat9/webapps state=absent
+  when: st.stat.isdir == True
+
+- name: symlink webapps dir
+  file: src=/var/lib/tomcat9/webapps dest=/opt/tomcat9/webapps state=link
+
+- name: create webapps/ROOT dir
+  file: path=/var/lib/tomcat9/webapps/ROOT state=directory
+
+- name: create healthcheck.html (for healthcheck)
+  copy: src=healthcheck.html dest=/var/lib/tomcat9/webapps/ROOT/healthcheck.html
+
+### log ディレクトリを作成し、シンボリックリンクを張る
+- name: create log dir
+  file: path=/var/log/tomcat9 state=directory owner=tomcat group=tomcat
+
+- name: stat logs dir
+  stat: path=/opt/tomcat9/logs
+  register: st
+
+- name: delete old logs dir
+  file: path=/opt/tomcat9/logs state=absent
+  when: st.stat.isdir == True
+
+- name: symlink log dir
+  file: src=/var/log/tomcat9 dest=/opt/tomcat9/logs state=link
+
+### 設定ファイル類のインストール
+- name: install server config
+  template: src={{ item }}.j2 dest=/opt/tomcat9/conf/{{ item }} owner=tomcat group=tomcat mode=0644
+  with_items:
+    - server.xml
+    - context.xml
+  notify: restart_tomcat9
+
+- name: install logrotate config
+  template: src=tomcat9-logrotate.j2 dest=/etc/logrotate.d/tomcat9 mode=0644
+
+# systemctl サービスの有効化
+- name: add tomcat9 service file
+  template: src=tomcat9.service.j2 dest=/etc/systemd/system/tomcat9.service
+  notify: restart_tomcat9
+
+- name: add tomcat9 env file
+  template: src=tomcat9-env.j2 dest=/etc/sysconfig/tomcat9
+  notify: restart_tomcat9
+
+- name: reload systemd
+  command: systemctl daemon-reload
+
+- name: enable/start tomcat
+  service: name=tomcat9 state=started enabled=yes

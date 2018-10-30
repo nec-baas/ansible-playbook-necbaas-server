@@ -1,0 +1,6 @@
+---
+# Install openjdk
+- name: install openjdk
+  yum:
+    name: java-{{ openjdk_version }}-openjdk-headless
+    state: latest

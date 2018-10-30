@@ -1,0 +1,31 @@
+---
+# Tomcat: バージョン
+tomcat9_version: 9.0.12
+
+# Tomcat: 待ち受けポート
+tomcat9_port: 8080
+
+# Tomcat: 最大スレッド数
+tomcat9_max_threads: 2000
+# Tomcat: 最大コネクション数
+tomcat9_max_connections: 2000
+
+# Tomcat: 最大メモリ量(-Xmx)
+tomcat9_max_memory: '2048m'
+# Tomcat: 最小メモリ量(-Xms)
+tomcat9_min_memory: '1024m'
+# Tomcat: 追加JVMオプション
+tomcat9_jvm_options: ''
+
+# Tomcat: HTTPSリバースプロキシ使用設定(ELBなど)
+tomcat9_https_revproxy: False
+
+# Tomcat9 JAVA_OPTS
+tomcat9_memory: "-Xmx{{ tomcat9_max_memory }} -Xms{{ tomcat9_min_memory }}"
+tomcat9_gc: "-XX:+UseConcMarkSweepGC"
+tomcat9_gclog: "-Xloggc:/var/log/tomcat9/gc.log.%t -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=5 -XX:GCLogFileSize=10M"
+tomcat9_heapdump: "-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/var/log/tomcat9"
+
+tomcat9_java_opts: "-Djava.awt.headless=true {{ tomcat9_memory }} {{ tomcat9_gc }} {{ tomcat9_gclog }} {{ tomcat9_heapdump }} {{ tomcat9_jvm_options }}"
+
+#  -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9012 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false

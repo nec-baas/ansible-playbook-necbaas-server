@@ -1,0 +1,17 @@
+[Unit]
+Description=Tomcat 9 application server
+After=network.target mongod.service
+
+[Service]
+Type=oneshot
+User=tomcat
+Group=tomcat
+EnvironmentFile=/etc/sysconfig/tomcat9
+RemainAfterExit=yes
+
+ExecStart=/opt/tomcat9/bin/startup.sh
+ExecStop=/opt/tomcat9/bin/shutdown.sh
+ExecReStart=/opt/tomcat9/bin/shutdown.sh;/opt/tomcat9/bin/startup.sh
+
+[Install]
+WantedBy=multi-user.target

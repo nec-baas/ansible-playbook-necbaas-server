@@ -1,0 +1,19 @@
+---
+# bind するアドレス/ポート
+mongodb_mongod_bind_ip: 0.0.0.0
+mongodb_mongod_port: 27017
+
+# 認証機能の使用
+mongodb_enable_auth: false
+# 認証ユーザ
+mongodb_admin_user: ''
+# 認証パスワード
+mongodb_admin_password: ''
+
+# レプリカセットの使用
+mongodb_enable_replication: false
+# レプリカセット名
+mongodb_repl_set_name: 'rs0'
+
+# シャーディングの使用
+mongodb_enable_sharding: false

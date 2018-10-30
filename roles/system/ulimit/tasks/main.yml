@@ -1,0 +1,5 @@
+---
+- name: setup ulimit settings
+  template: src=99-nproc-nofile.conf dest=/etc/security/limits.d/99-nproc-nofile.conf
+
+

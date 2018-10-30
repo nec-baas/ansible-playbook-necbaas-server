@@ -1,0 +1,7 @@
+# NEC Mobile Backend Platform Server
+---
+- hosts: baas-server
+  become: yes
+
+  roles:
+    - role: necbaas-server

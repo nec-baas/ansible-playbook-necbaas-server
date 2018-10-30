@@ -1,0 +1,43 @@
+systemLog:
+  destination: file
+  path: "/var/log/mongodb/mongod.log"
+  logAppend: true
+
+storage:
+  dbPath: "/var/lib/mongo"
+
+processManagement:
+  fork: true
+  pidFilePath: "/var/run/mongodb/mongod.pid"
+
+net:
+  port: {{mongodb_mongod_port}}
+  bindIp: {{mongodb_mongod_bind_ip}}
+
+{% if mongodb_enable_auth %}
+# enable auth
+{% endif %}
+
+{% if mongodb_enable_replication %}
+replication:
+  replSetName: {{mongodb_repl_set_name}}
+{% endif %}
+
+{% if mongodb_enable_sharding %}
+sharding:
+  clusterRole: shardsvr
+{% endif %}
+
+storage:
+  engine: wiredTiger
+
+  wiredTiger:
+    engineConfig:
+      cacheSizeGB: 1
+      statisticsLogDelaySecs: 0
+      journalCompressor: snappy
+      directoryForIndexes: false
+    collectionConfig:
+      blockCompressor: snappy
+    indexConfig:
+      prefixCompression: true

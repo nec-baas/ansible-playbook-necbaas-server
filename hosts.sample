@@ -1,0 +1,7 @@
+# Inventory file
+
+[mongodb]
+vagrant
+
+[baas-server]
+vagrant
