@@ -36,7 +36,7 @@ Playbook の構成
 * common.yml: Proxy設定、ulimit設定など共通設定を行います
 * mongod.yml: MongoDB をインストールします
 * tomcat.yml: Tomcat をインストールします
-* baas_server.yml: BaaS サーバ(APIサーバ/Consoleサーバ)をインストールします
+* baas-server.yml: BaaS サーバ(APIサーバ/Consoleサーバ)をインストールします
 
 パラメータ(Variable)設定は group_vars 内の各ファイルに記述してください。
 各パラメータ値の詳細は、各 Role (role/*) 内の README.md を参照してください。
@@ -62,4 +62,4 @@ mongodb グループに対して MongoDB サーバのインストール、baas-s
 * SSE Push サーバ、Cloud Functions サーバのインストールは未対応
 * RabbitMQサーバ、fluentd サーバのインストールは未対応
 * MongoDB はシングル構成のみ対応しています(レプリカセット・シャーディングは未対応)
-* ファイヤウォールの設定は行いません。個別に解放を行ってください。
+* ファイヤウォールの設定は行いません。個別に開放を行ってください。
