@@ -46,6 +46,7 @@ Playbook の構成
 
 Ansible 実行前に Git submodule を更新してください。
 
+    $ git submodule init
     $ git submodule update
 
 ansible-playbook を実行します
