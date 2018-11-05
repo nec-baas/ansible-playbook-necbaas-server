@@ -1,5 +1,6 @@
 ---
 # Tomcat: バージョン
+tomcat_major_version: 9
 tomcat_version: 9.0.12
 
 # Tomcat: 待ち受けポート
