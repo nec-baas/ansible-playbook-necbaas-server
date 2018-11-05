@@ -1,0 +1,8 @@
+# /etc/sysconfig/tomcat: systemd env file
+
+#JAVA_HOME=/usr/java/default
+JAVA_HOME=/etc/alternatives/jre
+CATALINA_HOME=/opt/tomcat
+CATALINA_BASE=/opt/tomcat
+CATALINA_PID=/opt/tomcat/tomcat.pid
+JAVA_OPTS="{{ tomcat_java_opts }}"

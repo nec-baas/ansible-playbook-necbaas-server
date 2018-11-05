@@ -4,4 +4,4 @@
 
   roles:
     - role: openjdk
-    - role: tomcat9
+    - role: tomcat
