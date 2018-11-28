@@ -1,5 +1,4 @@
 ---
 - include: common.yml
 - include: mongod.yml
-- include: tomcat.yml
 - include: baas-server.yml

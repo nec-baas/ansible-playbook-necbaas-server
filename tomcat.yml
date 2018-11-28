@@ -1,7 +1,0 @@
----
-- hosts: baas-server
-  become: yes
-
-  roles:
-    - role: openjdk
-    - role: tomcat
