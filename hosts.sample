@@ -3,5 +3,11 @@
 [mongodb]
 vagrant
 
+[rabbitmq]
+vagrant
+
+[ssepush-server]
+vagrant
+
 [baas-server]
 vagrant

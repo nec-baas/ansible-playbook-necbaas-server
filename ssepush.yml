@@ -1,0 +1,9 @@
+---
+# SSE Push サーバ
+- hosts: ssepush-server
+  become: yes
+
+  roles:
+    - role: openjdk
+    - role: tomcat
+    - role: necbaas/ssepush-server

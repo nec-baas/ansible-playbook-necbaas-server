@@ -1,0 +1,4 @@
+---
+# AMQP URI
+ssepush_amqp_uri: "amqp://rabbitmq:rabbitmq@localhost:5672"
+

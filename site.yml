@@ -1,4 +1,6 @@
 ---
 - include: common.yml
 - include: mongod.yml
+- include: rabbitmq.yml
+- include: ssepush.yml
 - include: baas-server.yml
