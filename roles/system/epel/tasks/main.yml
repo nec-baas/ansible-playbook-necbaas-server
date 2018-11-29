@@ -1,0 +1,27 @@
+- name: create epel dir (epel-release)
+  file:
+    path: '{{ epel_dir }}'
+    state: directory
+
+# epel-releaseの更新(CentOS)
+- name: Install epel-release repository configuration (CentOS)
+  yum:
+    name: "epel-release"
+    state: present
+  when:
+    ansible_distribution == 'CentOS'
+
+# epel-releaseの適用(RedHat)
+- block:
+  - name: copy epel-release rpm
+    copy:
+      src: '{{ epel_release_rpm }}'
+      dest: '{{ epel_dir }}'
+
+  - name: Install epel-release rpm
+    yum:
+      name: '{{ epel_dir }}/{{ epel_release_rpm }}'
+
+  when:
+    ansible_distribution == 'RedHat'
+

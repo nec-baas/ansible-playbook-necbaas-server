@@ -1,0 +1,16 @@
+# Erlang yum 設定を投入する
+- name: Install erlang yum config
+  template: src=rabbitmq-erlang.repo.j2 dest=/etc/yum.repos.d/rabbitmq-erlang.repo
+
+# Erlang を yum からインストール
+- name: Install erlang from yum
+  yum: name=erlang state=latest
+  notify: restart_rabbitmq_server
+
+# RabbitMQ RPM をダウンロード
+- name: Download RabbitMQ RPM
+  get_url: url={{ rabbitmq_rpm_url }} dest=/opt/download/{{ rabbitmq_rpm }}
+
+# RabbitMQ をインストールする
+- name: Install RabbitMQ Server
+  yum: name=/opt/download/{{ rabbitmq_rpm }} state=present

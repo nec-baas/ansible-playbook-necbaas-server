@@ -1,0 +1,6 @@
+---
+# Erlang RPM (RHEL7)
+rabbitmq_erlang_rpm: erlang-{{ rabbitmq_erlang_version_full }}.el7.centos.x86_64.rpm
+
+rabbitmq_erlang_rpm_url: https://github.com/rabbitmq/erlang-rpm/releases/download/v{{ rabbitmq_erlang_version }}/{{ rabbitmq_erlang_rpm }}
+

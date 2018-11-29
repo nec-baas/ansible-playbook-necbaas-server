@@ -1,0 +1,17 @@
+# local_action では RHELバージョンが判別できないので、Erlang は RHEL6 と 7 の両方を取得する
+- block:
+    # Download erlang rpm of RHEL6
+    - include_vars: "../vars/rhel6.yml"
+    - local_action: get_url url={{ rabbitmq_erlang_rpm_url }} dest={{ role_path }}/files/{{ rabbitmq_erlang_rpm }}
+
+    # Download erlang rpm of RHEL7
+    - include_vars: "../vars/rhel7.yml"
+    - local_action: get_url url={{ rabbitmq_erlang_rpm_url }} dest={{ role_path }}/files/{{ rabbitmq_erlang_rpm }}
+
+    # Download rabbitmq rpm
+    - local_action: get_url url={{ rabbitmq_rpm_url }} dest={{ role_path }}/files/{{ rabbitmq_rpm }}
+
+  become: false
+  environment: "{{ proxy_env }}"
+  tags:
+    - local_download

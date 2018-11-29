@@ -1,0 +1,11 @@
+%% -*- mode: erlang -*-
+[
+  {rabbit, [
+    %% TCP listen port
+    {tcp_listeners, [{{ rabbitmq_node_port }}]},
+    %% Default User
+    {default_user, <<"{{ rabbitmq_default_user }}">> },
+    %% Default Password
+    {default_pass, <<"{{ rabbitmq_default_pass }}">> }
+  ]}
+].

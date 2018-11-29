@@ -1,0 +1,30 @@
+---
+# RabbitMQ バージョン
+rabbitmq_version: 3.7.7
+
+# RabbitMQ バージョン(サフィックス込み)
+rabbitmq_version_full: 3.7.7-1
+
+# Erlang バージョン設定
+rabbitmq_erlang_version_major: 19
+
+# RabbitMQ Node ポート番号
+rabbitmq_node_port: 5672
+
+# RabbitMQ デフォルトユーザ名
+rabbitmq_default_user: "rabbitmq"
+
+# RabbitMQ デフォルトパスワード
+rabbitmq_default_pass: "rabbitmq"
+
+# クラスタリング用 Erlang Cookie
+rabbitmq_erlang_cookie: "jmY5LEH1PawnXEP8"
+
+### 以下は local RPM インストール時のみ指定
+### (vars/main.yml の local_download を true にした場合のみ使用)
+
+# Erlang バージョン設定
+rabbitmq_erlang_version: 19.3.6.10
+# Erlang バージョン設定 (サフィックス込み)
+rabbitmq_erlang_version_full: 19.3.6.10-1
+

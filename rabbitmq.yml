@@ -1,0 +1,9 @@
+---
+# RabbitMQ
+- hosts: rabbitmq
+  become: yes
+
+  roles:
+    - role: system/epel
+    - role: rabbitmq
+

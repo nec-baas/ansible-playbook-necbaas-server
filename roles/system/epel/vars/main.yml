@@ -1,0 +1,6 @@
+# epel directory
+epel_dir: '/opt/download/epel'
+
+# epel_release (RedHat)
+epel_release_rpm: 'epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm'
+

@@ -1,0 +1,14 @@
+# Local RPM を転送
+- name: Copy local erlang to target
+  copy: src={{ rabbitmq_erlang_rpm }} dest=/opt/download/{{ rabbitmq_erlang_rpm }}
+- name: Copy local RabbitMQ to target
+  copy: src={{ rabbitmq_rpm }} dest=/opt/download/{{ rabbitmq_rpm }}
+
+# Erlang をインストールする
+- name: Install erlang
+  yum: name=/opt/download/{{ rabbitmq_erlang_rpm }} state=present
+  notify: restart_rabbitmq_server
+
+# RabbitMQ をインストールする
+- name: Install RabbitMQ Server
+  yum: name=/opt/download/{{ rabbitmq_rpm }} state=present

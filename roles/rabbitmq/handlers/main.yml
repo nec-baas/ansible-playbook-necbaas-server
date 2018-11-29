@@ -1,0 +1,4 @@
+---
+- name: restart_rabbitmq_server
+  service: name=rabbitmq-server state=restarted
+
