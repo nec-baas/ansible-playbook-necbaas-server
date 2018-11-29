@@ -6,4 +6,4 @@
   roles:
     - role: openjdk
     - role: tomcat
-    - role: necbaas-server
+    - role: necbaas/baas-server

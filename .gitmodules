@@ -1,3 +1,4 @@
-[submodule "roles/necbaas-server"]
-	path = roles/necbaas-server
-	url = https://github.com/nec-baas/ansible-role-necbaas-server.git
+[submodule "roles/necbaas"]
+	path = roles/necbaas
+	url = http://git.local.antcloud.biz/gitbucket/git/antc/ansible-role-necbaas-server.git
+	branch = private/zhou/develop
