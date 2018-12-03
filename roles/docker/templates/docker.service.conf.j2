@@ -1,0 +1,4 @@
+[Service]
+
+ExecStart=
+ExecStart=/usr/bin/docker daemon {% if docker_uri_tcp|default('false')  %} -H {{ docker_uri }} {% endif %}

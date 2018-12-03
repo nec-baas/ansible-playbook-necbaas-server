@@ -1,0 +1,76 @@
+---
+# centosの構築手順（ https://docs.docker.com/engine/installation/linux/centos/ )を参照
+
+# device-mapperのインストール(古いバージョンの場合は、dockerが起動できない場合がある)
+- name: Install device-mapper
+  yum:
+    name: device-mapper
+    enablerepo: epel
+    state: latest
+  tags:
+    - docker
+
+# Dockerのyum リポジトリの取得
+- name: Add docker yum repository config
+  template:
+    src:   docker.yum.repo.j2
+    dest:  /etc/yum.repos.d/docker.repo
+    owner: root
+    group: root
+    mode:  0644
+  tags:
+    - docker
+
+# Dockerのyum リポジトリの取得(　Ansible v2.1　以上)
+#- name: Add docker yum repository
+#  yum_repository:
+#    name:        dockerrepo
+#    description: "Docker Repository"
+#    baseurl:     "https://yum.dockerproject.org/repo/main/centos/$releasever/"
+#    enabled:     yes
+#    gpgcheck:    yes
+#    gpgkey:      "https://yum.dockerproject.org/gpg"
+#  tags:
+#    - docker
+
+# Centos7/RHEL7以上の場合、Docker engine インストールとサービス設定
+- block:
+  # docker-engine最新版のインストール
+  - name: Install latest docker-engine 
+    yum:
+      name: docker-engine
+      state: present
+
+  # Dockerサービスの設定ファイルのディレクトリの作成
+  - name: Create directory for docker service supplementary config
+    file:
+      path:  /etc/systemd/system/docker.service.d
+      owner: root
+      group: root
+      mode:  0755
+      state: directory
+
+  # Dockerサービスの設定ファイルの適用
+  - name: Create docker service supplementary config file
+    template:
+      src:   docker.service.conf.j2
+      dest:  /etc/systemd/system/docker.service.d/docker.service.conf
+      owner: root
+      group: root
+      mode:  0644
+    register: docker_conf
+
+  # Dockerのプロキシの適用
+  - name: Create docker http proxy supplementary config file
+    template:
+      src:   docker.http-proxy.conf.j2
+      dest:  /etc/systemd/system/docker.service.d/docker.http-proxy.conf
+      owner: root
+      group: root
+      mode:  0644
+    register: docker_proxy_conf
+    when: proxy_env is defined
+
+  when: ansible_os_family == "RedHat" and ansible_distribution_version >= "7"
+  tags:
+    - docker

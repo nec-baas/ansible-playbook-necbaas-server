@@ -1,0 +1,4 @@
+---
+# Docker URI
+docker_uri: "unix:///var/run/docker.sock"
+

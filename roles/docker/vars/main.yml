@@ -1,0 +1,6 @@
+---
+## Package
+docker_yum_gpg_key_url:  'https://yum.dockerproject.org/gpg'
+#RHEL6/7の$releaseverは、6Server/7Serverであるが、docker.repoでは、"6/7"しかサポートしないため、下記のように修正
+docker_yum_repo_baseurl: 'https://yum.dockerproject.org/repo/main/centos/{{ ansible_distribution_major_version }}/'
+

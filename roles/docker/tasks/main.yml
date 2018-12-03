@@ -1,0 +1,33 @@
+---
+
+- name: Install docker(centos or Redhat)
+  include: "install-redhat.yml"
+  when:
+    ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
+  failed_when:
+    ansible_distribution != 'CentOS' and ansible_distribution != 'RedHat'
+  tags:
+    - docker
+
+# dockerサービスの起動
+- name: Start docker
+  service:
+    name:    docker
+    enabled: yes
+    state:   started
+  tags:
+    - docker
+
+# dockerの設定ファイルが変更された場合は、強制的に、設定ファイルを再ロード、再起動
+- block:
+  - name: Reload systemd
+    command: systemctl daemon-reload
+
+  - name: Restart docker
+    service:
+      name: docker
+      state: restarted
+
+  when: docker_conf.changed or docker_proxy_conf.changed
+  tags:
+    - docker
