@@ -8,5 +8,5 @@
     - role: system/epel
     - { role: docker, when: cloudfn_system_type == 'docker' }
     - { role: nodejs, when: cloudfn_system_type == 'direct' }
-    - role: cloudfn-server
+    - role: necbaas/cloudfn-server
 
