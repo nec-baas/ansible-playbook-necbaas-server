@@ -1,0 +1,12 @@
+---
+# Cloud Functions サーバ
+- hosts: cloudfn-server
+  become: yes
+
+  roles:
+    - role: openjdk
+    - role: system/epel
+    - { role: docker, when: cloudfn_system_type == 'docker' }
+    - { role: nodejs, when: cloudfn_system_type == 'direct' }
+    - role: cloudfn-server
+

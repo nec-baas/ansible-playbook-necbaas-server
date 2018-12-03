@@ -11,3 +11,6 @@ vagrant
 
 [baas-server]
 vagrant
+
+[cloudfn-server]
+vagrant

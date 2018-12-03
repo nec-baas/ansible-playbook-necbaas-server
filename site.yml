@@ -4,3 +4,4 @@
 - include: rabbitmq.yml
 - include: ssepush.yml
 - include: baas-server.yml
+- include: cloudfn.yml

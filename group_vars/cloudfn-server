@@ -1,0 +1,9 @@
+---
+# Cloud Functionの起動タイプ(docker: Dockerを使用する。direct: Dockerを使用しない)
+cloudfn_system_type: direct
+
+# AMQP URI
+cloudfn_amqp_uri: "amqp://rabbitmq:rabbitmq@localhost:5672"
+
+
+

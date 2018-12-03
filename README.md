@@ -38,6 +38,7 @@ Playbook の構成
 * tomcat.yml: Tomcat をインストールします
 * baas-server.yml: BaaS サーバ(APIサーバ/Consoleサーバ)をインストールします
 * ssepush.yml: SSEPush サーバをインストールします
+* cloudfn.yml: Cloud Functions サーバをインストールします。
 
 パラメータ(Variable)設定は group_vars 内の各ファイルに記述してください。
 各パラメータ値の詳細は、各 Role (role/*) 内の README.md を参照してください。
@@ -61,10 +62,11 @@ inventory file にはデプロイ先のホスト名を指定してください�
 * rabbitmq グループ： RabbitMQ サーバ
 * baas-server グループ： BaaS サーバ
 * ssepush-server グループ： SSEPush サーバ
+* cloudfn-server グループ： Cloud Functions サーバ
 
 制限事項
 --------
 
-* Cloud Functions サーバのインストールは未対応
+* fluentd サーバのインストールは未対応
 * MongoDB はシングル構成のみ対応しています(レプリカセット・シャーディングは未対応)
 * ファイヤウォールの設定は行いません。個別に開放を行ってください。
