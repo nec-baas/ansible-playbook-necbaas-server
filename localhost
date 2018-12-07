@@ -1,0 +1,16 @@
+# Inventory file
+
+[mongodb]
+localhost
+
+[rabbitmq]
+localhost
+
+[ssepush-server]
+localhost
+
+[baas-server]
+localhost
+
+[cloudfn-server]
+localhost
