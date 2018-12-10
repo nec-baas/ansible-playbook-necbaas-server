@@ -14,5 +14,5 @@
   shell: wget https://bootstrap.pypa.io/get-pip.py -O - | python
   args:
     creates: /usr/bin/pip
-  environment: "{{ proxy_env }}"
+  environment: "{{ proxy_env | default('') }}"
 
