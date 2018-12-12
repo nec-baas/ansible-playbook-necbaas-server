@@ -6,7 +6,9 @@ NECモバイルバックエンド基盤サーバをセットアップする Ansi
 サポート環境
 ------------
 
-ターゲットホスト: RHEL 7 (x64) または CentOS 7 (x64)
+ターゲットホスト
+- RHEL 7 (x64) または CentOS 7 (x64)
+- Amazon Linux 2 (x64)
 
 制御ホスト(Ansible を実行するホスト): Ansible 2.0 以上
 

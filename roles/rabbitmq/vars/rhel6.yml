@@ -1,5 +1,0 @@
----
-# Erlang RPM (RHEL6)
-rabbitmq_erlang_rpm: erlang-{{ rabbitmq_erlang_version_full }}.el6.x86_64.rpm
-
-rabbitmq_erlang_rpm_url: https://github.com/rabbitmq/erlang-rpm/releases/download/v{{ rabbitmq_erlang_version }}/{{ rabbitmq_erlang_rpm }}

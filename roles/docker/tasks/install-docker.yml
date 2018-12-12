@@ -33,7 +33,7 @@
 #  tags:
 #    - docker
 
-# Centos7/RHEL7以上の場合、Docker engine インストールとサービス設定
+# Docker engine インストールとサービス設定
 - block:
   # docker-engine最新版のインストール
   - name: Install latest docker-engine 
@@ -71,6 +71,5 @@
     register: docker_proxy_conf
     when: proxy_env is defined
 
-  when: ansible_os_family == "RedHat" and ansible_distribution_version >= "7"
   tags:
     - docker

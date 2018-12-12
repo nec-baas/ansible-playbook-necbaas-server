@@ -1,6 +1,9 @@
 ---
+# リポジトリの変数設定
+- include_vars: "../vars/{{ ansible_distribution }}.yml"
+
 - name: install mongodb-4.0 repo
-  copy: src=mongodb-org-4.0.repo dest=/etc/yum.repos.d/mongodb-org-4.0.repo
+  template: src=mongodb-org-4.0.repo.j2 dest=/etc/yum.repos.d/mongodb-org-4.0.repo
 
 - name: install mongodb tools
   yum: name={{ item }}

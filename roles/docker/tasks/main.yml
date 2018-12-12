@@ -1,11 +1,7 @@
 ---
 
-- name: Install docker(centos or Redhat)
-  include: "install-redhat.yml"
-  when:
-    ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
-  failed_when:
-    ansible_distribution != 'CentOS' and ansible_distribution != 'RedHat'
+- name: Install docker
+  include: "install-docker.yml"
   tags:
     - docker
 
