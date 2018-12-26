@@ -72,3 +72,9 @@ inventory file にはデプロイ先のホスト名を指定してください�
 * fluentd サーバのインストールは未対応
 * MongoDB はシングル構成のみ対応しています(レプリカセット・シャーディングは未対応)
 * ファイヤウォールの設定は行いません。個別に開放を行ってください。
+
+Vagrant Box イメージ作成と利用
+------------------------------
+
+Ansible Playbook でデプロイした Vagrant Box の作成と利用手順は、
+[vm/vagrantbox/README.md](vm/vagrantbox/README.md) を参照してください。

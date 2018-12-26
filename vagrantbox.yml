@@ -1,0 +1,7 @@
+# Vagrant Box の配布向けの設定
+---
+- hosts: "{{ vagrantbox_host | default('vagrantbox_host') }}"
+  gather_facts: true
+  become: yes
+  roles:
+    - role: system/cleanup
