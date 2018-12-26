@@ -16,3 +16,6 @@
 
 # MongoDB 認証パスワード
 #baas_server_mongodb_auth_password: ''
+
+# AMQP サーバ設定 (SSE Push/Cloud Functions で必要)
+#baas_server_amqp_uri: 'amqp://rabbitmq:rabbitmq@localhost:5672'
