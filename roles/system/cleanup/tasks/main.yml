@@ -1,0 +1,40 @@
+---
+# yum cache の削除
+- name: Clean yum cache
+  command: "yum clean all"
+  changed_when: False
+
+# 不要ディレクトリの削除
+- name: Remove unused files
+  file: 
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ cleanup_remove_files }}"
+
+# システムから proxy 設定の削除
+- name: Remove proxy configuration
+  lineinfile: 
+    dest: "{{ item[0] }}"
+    state: absent
+    regexp: "{{ item[1] }}"
+  with_nested:
+    - [ "/etc/environment", "/etc/yum.conf" ]
+    - [ 'http_proxy=', 'https_proxy=', 'no_proxy=', 'proxy=' ]
+
+# ユーザの削除
+- name: Remove users
+  user:
+    name: "{{ item }}"
+    state: absent
+    remove: yes
+  with_items:
+    - "{{ cleanup_remove_users }}"
+
+# 不要な sudo　設定ファイルの削除
+- name: Remove sudoers configuration
+  file:
+    path: "/etc/sudoers.d/{{ item }}"
+    state: absent
+  with_items:
+    - "{{ cleanup_remove_users }}"
