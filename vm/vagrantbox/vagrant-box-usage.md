@@ -10,7 +10,7 @@ necbaas サーバの公開 Box の利用方法
 Box の起動方法
 ----------------
 
-Vagrantfile.necbaas の Box 名とバージョンを指定した後、 VM を起動する。 
+Vagrantfile.necbaas の Box 名とバージョンを指定した後、 VM を起動します。 
 
 * config.vm.box = の値を公開 Box 名を指定する（default: "necbaas/baas-server")
 * config.vm.box_version = の値をバージョン名を指定する（default: "7.5.1")
