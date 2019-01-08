@@ -20,12 +20,12 @@ Vagrant Box VM イメージ作成
 
 例） ホスト(vagrant)へサーバをデプロイする
 
-	$ cd ..
+	$ cd ../../
 	$ ansible-playbook -i hosts-vagrant site.yml
 
 2. config.sh の編集
 
-ディレクトリ（vm)へ移動し、 config.sh.sample を config.sh にコピーする。
+ディレクトリ（vm/vagrantbox)へ移動し、 config.sh.sample を config.sh にコピーする。
 
 * VER= の値をバージョン名を指定する
 * SERVER_VM_NAME= の値を上記のVagrant VM 名を指定する
@@ -33,7 +33,7 @@ Vagrant Box VM イメージ作成
 
 3.Vagrant Box イメージの作成
 
-ディレクトリ（vm)の配下で、下記のコマンドを実行する。 イメージファイルは out/$VER ディレクトリ以下に生成される。
+ディレクトリ（vm/vagrantbox)の配下で、下記のコマンドを実行する。 イメージファイルは out/$VER ディレクトリ以下に生成される。
 
 	$ ./create-vagrantbox.sh
 
