@@ -2,7 +2,7 @@
 
 # Description
 
-* 不要な（フォルダ・ファイル、Proxy設定とユーザ）
+* 不要な（フォルダ・ファイル、Proxy設定）
 * yum キャッシュの削除
 
 ## Supports
@@ -23,6 +23,5 @@
 
 ## Variables
 
-* ``cleanup_remove_users``: 削除ユーザのリスト (List, default:[])
 * ``cleanup_remove_files``: 削除フォルド・ファイルのリスト (List, default:["/opt/download", "/etc/profile.d/proxy.sh"])
 

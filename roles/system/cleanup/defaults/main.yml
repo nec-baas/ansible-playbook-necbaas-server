@@ -1,6 +1,4 @@
 ---
-# 削除ユーザのリスト
-cleanup_remove_users: []
 
 # 削除フォルダ・ファイルのリスト
 cleanup_remove_files: ["/opt/download", "/etc/profile.d/proxy.sh"]
