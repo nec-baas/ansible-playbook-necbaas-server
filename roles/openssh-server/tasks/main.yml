@@ -1,0 +1,30 @@
+---
+
+# openssh-server をインストールする (centos or Redhat)
+- name: install sshd for RedHat
+  yum: 
+    name: openssh-server
+    state: installed
+
+# openssh-server 設定を行う
+- name: configure sshd
+  template: 
+    src: sshd_config.j2
+    dest : "/etc/ssh/sshd_config"
+    validate: "/usr/sbin/sshd -t -f %s"
+  register: sshd_config_changed
+
+# sshd サーバ起動の有効
+- name: enable sshd
+  service: 
+    name: sshd
+    state: started
+    enabled: yes
+
+# 設定ファイルの変更があった場合、強制的にリスタート
+# 別ロールで、Playbook 実行ユーザ権限を変更する場合があるので、ハンドラを利用しない
+- name: restart_sshd
+  service: 
+    name: sshd
+    state: restarted
+  when: sshd_config_changed.changed

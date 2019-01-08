@@ -1,0 +1,14 @@
+---
+
+# sshd が Listen するポートの指定
+sshd_port: 22
+
+# sshd が Listen するアドレスの指定
+sshd_listen_address: '0.0.0.0'
+
+# 公開鍵認証許可設定
+sshd_Pubkey_authentication: 'yes'
+
+# パスワード認証許可設定
+sshd_password_authentication: 'yes'
+
