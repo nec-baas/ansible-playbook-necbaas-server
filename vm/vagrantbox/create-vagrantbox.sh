@@ -15,8 +15,7 @@ mkdir -p $DESTDIR
 
 # 不要なファイルの削除
 env ANSIBLE_SSH_ARGS="-o ControlPersist=0s" \
-    ansible-playbook ../../vagrantbox.yml \
-    --extra-vars "vagrantbox_host=$SERVER_VM_NAME" \
+    ansible-playbook -i host ../../vagrantbox.yml \
     -v
 
 # VM の停止

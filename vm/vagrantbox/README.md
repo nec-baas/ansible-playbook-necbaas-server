@@ -31,17 +31,23 @@ Vagrant Box VM イメージ作成
 * SERVER_VM_NAME= の値を上記のVagrant VM 名を指定する
 * VAGRANT_BOX_NAME= の値を Vagrant Box イメージのエクスポート名称を指定する
 
-3.Vagrant Box イメージの作成
+3. Inventory ファイルを修正する。
+
+Inventory ファイル（host）で [vagrant-box] グループに、1.でサーバをデプロイしたホストを指定する。
+
+前述の例の場合は、 vagrant になる。
+
+4. Vagrant Box イメージの作成
 
 ディレクトリ（vm/vagrantbox)の配下で、下記のコマンドを実行する。 イメージファイルは out/$VER ディレクトリ以下に生成される。
 
 	$ ./create-vagrantbox.sh
 
-4. necbaas サーバの公開 Box の利用方法
+5. necbaas サーバの公開 Box の利用方法
 
 [vagrant-box-usage.md](./vagrant-box-usage.md) を参照してください。
 
-5. Vagrant Box の公開手順
+6. Vagrant Box の公開手順
 
 VagrantCloud の[マニュアル](https://www.vagrantup.com/docs/vagrant-cloud/boxes/create.html) を参照してください。
 

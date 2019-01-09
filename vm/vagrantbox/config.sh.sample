@@ -2,7 +2,7 @@
 VER=7.5.1
 
 # Vagrant Box name( vagrant status で確認)
-SERVER_VM_NAME="vagrant"
+SERVER_VM_NAME="necbaas_servers"
 
 # Vagrant Box イメージのエクスポート名称の指定
 VAGRANT_BOX_NAME="necbaas-baas-server"
