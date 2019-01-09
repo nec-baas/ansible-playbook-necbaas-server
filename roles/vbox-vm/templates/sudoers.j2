@@ -1,0 +1,4 @@
+{% if vbox_mgr_username is defined and vbox_mgr_username %}
+%{{ vbox_mgr_username }} ALL=(ALL) NOPASSWD: {{ vbox_mgr_nopasswd }} 
+{% endif %}
+

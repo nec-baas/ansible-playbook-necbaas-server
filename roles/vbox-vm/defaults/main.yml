@@ -1,0 +1,13 @@
+---
+# VirtualBox VM　管理者名
+vbox_mgr_username: 
+
+# VirtualBox VM　管理者パスワード
+vbox_mgr_password: 
+
+# VirtualBox VM　管理者の sudo nopasswd 設定
+vbox_mgr_nopasswd: "ALL"
+
+# 削除ユーザのリスト
+vbox_remove_users: []
+

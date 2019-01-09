@@ -1,0 +1,32 @@
+# バージョン
+VER=7.5.1
+
+# Vagrant VM name( vagrant status で確認)
+SERVER_VM_NAME="necbaas_servers"
+
+# VirtualBox VM (VBOX VM) イメージのエクスポート名称の指定)
+VBOX_VM_NAME="baas-server-$VER"
+
+# VBOX VM に割り当てメモリ容量(MB)
+VBOX_VM_MEMORY=2048
+
+# VBOX VM NATのポートフォワーディングの設定(name, type, host_ip,host_port,guest_ip,guest_port)
+VBOX_NAT_PORT_FORWARDING='"ssh,tcp,,2222,,22" "http,tcp,,8080,,8080"'
+
+# VBOX VM 管理者
+VBOX_MGR_USER="admin"
+
+# VBOX VM 管理者パスワード
+VBOX_MGR_PASSWORD="admin"
+
+# VBOX VM 削除ユーザリスト('"user1","user2",....')
+VBOX_REMOVE_USERS='"vagrant"'
+
+# VBOX VM 製品とベンダー情報
+VBOX_PRODUCT=
+VBOX_PRODUCT_URL=
+VBOX_VENDOR=
+VBOX_VENDOR_URL=
+VBOX_VERSION=
+VBOX_DESCRIPTION=
+

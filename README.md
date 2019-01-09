@@ -78,3 +78,9 @@ Vagrant Box イメージ作成と利用
 
 Ansible Playbook でデプロイした Vagrant Box の作成と利用手順は、
 [vm/vagrantbox/README.md](vm/vagrantbox/README.md) を参照してください。
+
+VirtualBox VM イメージ作成と利用
+--------------------------------
+
+Ansible Playbook でデプロイした Vagrant Box から、 VirtualBox VM 用イメージへの作成と利用手順は、
+[vm/virtualbox/README.md](vm/virtualbox/README.md) を参照してください。

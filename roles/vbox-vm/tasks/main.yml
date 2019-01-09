@@ -1,0 +1,42 @@
+---
+
+- block: 
+  # vbox 管理者ユーザの作成
+  - name: Add vbox management user
+    user:
+      name: "{{ vbox_mgr_username }}"
+      password: "{{ vbox_mgr_password | password_hash('sha512') }}"
+      shell: /bin/bash
+      append: yes
+
+# vbox 管理者ユーザの sudo　設定ファイルの追加
+  - name: Create sudoers configuration for management user
+    template:
+      src: "sudoers.j2"
+      dest: "/etc/sudoers.d/{{ vbox_mgr_username }}"
+      owner: root
+      group: root
+      mode: 0440
+
+  when: not( (vbox_mgr_username is none)
+          or (vbox_mgr_username | trim == '') )
+
+- block:
+  # ユーザの削除
+  - name: Remove users
+    user:
+      name: "{{ item }}"
+      state: absent
+      remove: yes
+    with_items:
+    - "{{ vbox_remove_users }}"
+
+  # 不要な sudo　設定ファイルの削除
+  - name: Remove sudoers configuration
+    file:
+      path: "/etc/sudoers.d/{{ item }}"
+      state: absent
+    with_items:
+    - "{{ vbox_remove_users }}"
+  tags:
+  - virtualbox_remove_users

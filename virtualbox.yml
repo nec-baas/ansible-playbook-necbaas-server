@@ -1,0 +1,9 @@
+# VirtualBox VM の配布向けの設定
+---
+- hosts: vbox-vm
+  gather_facts: true
+  become: yes
+  roles:
+    - role: openssh-server
+    - role: vbox-vm
+    - role: system/cleanup
