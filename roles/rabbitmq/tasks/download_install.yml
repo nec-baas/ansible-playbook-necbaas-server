@@ -4,7 +4,7 @@
 
 # Erlang を yum からインストール
 - name: Install erlang from yum
-  yum: name=erlang state=latest
+  yum: name=erlang-{{ rabbitmq_erlang_version }} state=present
   notify: restart_rabbitmq_server
 
 # RabbitMQ RPM をダウンロード
