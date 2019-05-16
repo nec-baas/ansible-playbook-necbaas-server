@@ -6,7 +6,7 @@ rabbitmq_rpm: rabbitmq-server-{{ rabbitmq_version_full }}.el7.noarch.rpm
 rabbitmq_rpm_url: https://dl.bintray.com/rabbitmq/all/rabbitmq-server/{{ rabbitmq_version }}/{{ rabbitmq_rpm }}
 
 # Erlang RPM (RHEL7)
-rabbitmq_erlang_rpm: erlang-{{ rabbitmq_erlang_version_full }}.el7.centos.x86_64.rpm
+rabbitmq_erlang_rpm: erlang-{{ rabbitmq_erlang_version_full }}.el7.x86_64.rpm
 rabbitmq_erlang_rpm_url: https://github.com/rabbitmq/erlang-rpm/releases/download/v{{ rabbitmq_erlang_version }}/{{ rabbitmq_erlang_rpm }}
 
 local_download: false
