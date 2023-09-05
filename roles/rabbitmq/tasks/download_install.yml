@@ -4,7 +4,10 @@
 
 # Erlang を yum からインストール
 - name: Install erlang from yum
-  yum: name=erlang-{{ rabbitmq_erlang_version }} state=present
+  yum:
+    name: erlang-{{ rabbitmq_erlang_version }}
+    disable_gpg_check: true
+    state: present
   notify: restart_rabbitmq_server
 
 # RabbitMQ RPM をダウンロード
@@ -13,4 +16,7 @@
 
 # RabbitMQ をインストールする
 - name: Install RabbitMQ Server
-  yum: name=/opt/download/{{ rabbitmq_rpm }} state=present
+  yum:
+    name: /opt/download/{{ rabbitmq_rpm }}
+    disable_gpg_check: true
+    state: present
