@@ -10,7 +10,10 @@
 
 ### Tomcat tarball をダウンロードする
 - name: download tomcat
-  get_url: url={{ tomcat_url }} dest=/opt/download/{{ tomcat_tarball }}
+  get_url:
+    url: "{{ tomcat_url }}"
+    dest: "/opt/download/{{ tomcat_tarball }}"
+    timeout: 60
 
 ### tarball を展開
 - name: unarchive tomcat
