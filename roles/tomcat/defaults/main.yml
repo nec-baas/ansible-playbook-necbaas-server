@@ -1,7 +1,7 @@
 ---
 # Tomcat: バージョン
 tomcat_major_version: 9
-tomcat_version: 9.0.14
+tomcat_version: 9.0.80
 
 # Tomcat: 待ち受けポート
 tomcat_port: 8080
