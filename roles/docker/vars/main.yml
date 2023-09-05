@@ -1,6 +1,1 @@
 ---
-## Package
-docker_yum_gpg_key_url:  'https://yum.dockerproject.org/gpg'
-# RHEL7 yum repo baseurl
-docker_yum_repo_baseurl: 'https://yum.dockerproject.org/repo/main/centos/7/'
-

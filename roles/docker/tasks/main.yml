@@ -1,7 +1,7 @@
 ---
 
 - name: Install docker
-  include: "install-docker.yml"
+  import_tasks: "install-docker.yml"
   tags:
     - docker
 
@@ -24,6 +24,7 @@
       name: docker
       state: restarted
 
-  when: docker_conf.changed or docker_proxy_conf.changed
+  #when: docker_conf.changed or docker_proxy_conf.changed
+  when: docker_proxy_conf.changed
   tags:
     - docker

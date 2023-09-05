@@ -2,43 +2,41 @@
 # centosの構築手順（ https://docs.docker.com/engine/installation/linux/centos/ )を参照
 
 # device-mapperのインストール(古いバージョンの場合は、dockerが起動できない場合がある)
-- name: Install device-mapper
-  yum:
-    name: device-mapper
-    enablerepo: epel
-    state: latest
-  tags:
-    - docker
-
-# Dockerのyum リポジトリの取得
-- name: Add docker yum repository config
-  template:
-    src:   docker.yum.repo.j2
-    dest:  /etc/yum.repos.d/docker.repo
-    owner: root
-    group: root
-    mode:  0644
-  tags:
-    - docker
-
-# Dockerのyum リポジトリの取得(　Ansible v2.1　以上)
-#- name: Add docker yum repository
-#  yum_repository:
-#    name:        dockerrepo
-#    description: "Docker Repository"
-#    baseurl:     "https://yum.dockerproject.org/repo/main/centos/$releasever/"
-#    enabled:     yes
-#    gpgcheck:    yes
-#    gpgkey:      "https://yum.dockerproject.org/gpg"
+#- name: Install device-mapper
+#  yum:
+#    name: device-mapper
+#    enablerepo: epel
+#    state: latest
 #  tags:
 #    - docker
 
-# Docker engine インストールとサービス設定
+# Install yum-utils
+- name: Install yum-utils
+  yum:
+    name: yum-utils
+    state: present
+  tags:
+    - docker
+
+# Install docker ce repo
+- name: Add docker yum repository
+  get_url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+    mode: '0644'
+  tags:
+    - docker
+
+# Docker CE インストールとサービス設定
 - block:
-  # docker-engine最新版のインストール
-  - name: Install latest docker-engine 
+  # Install docker ce
+  - name: Install latest docker-ce
     yum:
-      name: docker-engine
+      name:
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        #- docker-compose-plugin
       state: present
 
   # Dockerサービスの設定ファイルのディレクトリの作成
@@ -51,14 +49,14 @@
       state: directory
 
   # Dockerサービスの設定ファイルの適用
-  - name: Create docker service supplementary config file
-    template:
-      src:   docker.service.conf.j2
-      dest:  /etc/systemd/system/docker.service.d/docker.service.conf
-      owner: root
-      group: root
-      mode:  0644
-    register: docker_conf
+  #- name: Create docker service supplementary config file
+  #  template:
+  #    src:   docker.service.conf.j2
+  #    dest:  /etc/systemd/system/docker.service.d/docker.service.conf
+  #    owner: root
+  #    group: root
+  #   mode:  0644
+  #  register: docker_conf
 
   # Dockerのプロキシの適用
   - name: Create docker http proxy supplementary config file
