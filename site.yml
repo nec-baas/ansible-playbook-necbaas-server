@@ -1,7 +1,7 @@
 ---
-- include: common.yml
-- include: mongod.yml
-- include: rabbitmq.yml
-- include: ssepush.yml
-- include: baas-server.yml
-- include: cloudfn.yml
+- import_playbook: common.yml
+- import_playbook: mongod.yml
+- import_playbook: rabbitmq.yml
+- import_playbook: ssepush.yml
+- import_playbook: baas-server.yml
+- import_playbook: cloudfn.yml
