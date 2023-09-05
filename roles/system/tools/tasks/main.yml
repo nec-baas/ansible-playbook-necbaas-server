@@ -14,9 +14,16 @@
 #    creates: /usr/bin/easy_install
 
 # pip をインストールする
-- name: install pip
-  shell: wget https://bootstrap.pypa.io/get-pip.py -O - | python
-  args:
-    creates: /usr/bin/pip
-  environment: "{{ proxy_env | default('') }}"
+#- name: install pip
+#  shell: wget https://bootstrap.pypa.io/get-pip.py -O - | python
+#  args:
+#    creates: /usr/bin/pip
+#  environment: "{{ proxy_env | default('') }}"
 
+# Install python3 and pip
+- name: install python3 and pip
+  yum:
+    name:
+      - python3
+      - python3-pip
+    state: present
