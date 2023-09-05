@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 2023-09-05
+
+* Add support for RHEL8
+
 ## 2019-05-16
 
 * Update RabbitMQ Server: 3.7.7 -> 3.7.14
