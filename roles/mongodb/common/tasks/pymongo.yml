@@ -3,4 +3,6 @@
 # pymongo をインストールする
 - name: install pymongo
   #easy_install: name=pymongo
-  pip: name=pymongo state=present
+  pip:
+    name: pymongo
+    state: present

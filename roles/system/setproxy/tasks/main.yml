@@ -1,16 +1,27 @@
 ---
 - block:
     - name: yum proxy setup
-      lineinfile: dest=/etc/yum.conf state=present regexp='^proxy=' line='proxy={{ setproxy_url }}'
+      lineinfile:
+        dest: /etc/yum.conf
+        state: present
+        regexp: '^proxy='
+        line: 'proxy={{ setproxy_url }}'
 
     - name: proxy config in /etc/environment
-      lineinfile: dest=/etc/environment state=present regexp='^{{ item }}_proxy=' line='{{ item }}_proxy={{ setproxy_url }}'
+      lineinfile:
+        dest: /etc/environment
+        state: present
+        regexp: '^{{ item }}_proxy='
+        line: '{{ item }}_proxy={{ setproxy_url }}'
       with_items:
         - http
         - https
 
     - name: no_proxy config in /etc/environment
-      lineinfile: dest=/etc/environment state=present line='no_proxy=127.0.0.1,localhost'
+      lineinfile:
+        dest: /etc/environment
+        state: present
+        line: 'no_proxy=127.0.0.1,localhost'
 
     - name: install proxy.sh to /etc/profile.d
       template: src=proxy.sh.j2 dest=/etc/profile.d/proxy.sh

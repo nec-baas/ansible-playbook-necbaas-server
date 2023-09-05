@@ -1,15 +1,23 @@
 # Disable-thp スクリプトをインストール
 - name: Install disable-thp script
-  copy: src=disable-thp dest=/etc/rc.d/init.d/ mode=0755
+  copy:
+    src: disable-thp
+    dest: /etc/rc.d/init.d/
+    mode: 0755
   register: disable_thp_installed
 
 # systemd unit ファイルインストール
 - name: Install systemd unit file
-  copy: src=disable-thp.unit dest=/etc/systemd/system/disable-thp.unit
+  copy:
+    src: disable-thp.unit
+    dest: /etc/systemd/system/disable-thp.unit
 
 - name: Reload systemd
   command: systemctl daemon-reload
 
 # サービスの自動起動スクリプトを有効化
 - name: Enable/start disable-thp service
-  service: name=disable-thp enabled=yes state=restarted
+  service:
+    name: disable-thp
+    enabled: yes
+    state: restarted

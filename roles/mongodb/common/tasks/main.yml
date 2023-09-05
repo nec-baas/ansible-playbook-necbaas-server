@@ -3,22 +3,36 @@
 - include_vars: "../vars/{{ ansible_distribution }}.yml"
 
 - name: install mongodb-4.0 repo
-  template: src=mongodb-org-4.0.repo.j2 dest=/etc/yum.repos.d/mongodb-org-4.0.repo
+  template:
+    src: mongodb-org-4.0.repo.j2
+    dest: /etc/yum.repos.d/mongodb-org-4.0.repo
 
 - name: install mongodb tools
-  yum: name={{ item }}
+  yum:
+    name: "{{ item }}"
   with_items:
     - "mongodb-org-shell"
     - "mongodb-org-tools"
 
 - name: create mongod group
-  group: name=mongod
+  group:
+    name: mongod
 
 - name: create mongod user
-  user: name=mongod group=mongod home=/var/lib/mongo createhome=no shell=/bin/false
+  user:
+    name: mongod
+    group: mongod
+    home: /var/lib/mongo
+    createhome: no
+    shell: /bin/false
 
 - name: create directories
-  file: path="{{ item }}" state=directory owner=mongod group=mongod mode=0755
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: mongod
+    group: mongod
+    mode: 0755
   with_items:
     - /var/log/mongodb
     - /var/run/mongodb
@@ -29,5 +43,10 @@
 #  when: mongodb_enable_auth
 
 - name: install mongodb secrets
-  template: src=mongodb-secret.j2 dest=/var/lib/mongo/secret owner=mongod group=mongod mode=0400
+  template:
+    src: mongodb-secret.j2
+    dest: /var/lib/mongo/secret
+    owner: mongod
+    group: mongod
+    mode: 0400
   when: mongodb_enable_auth

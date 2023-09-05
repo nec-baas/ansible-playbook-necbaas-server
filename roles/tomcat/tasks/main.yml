@@ -1,12 +1,19 @@
 ---
 - name: ensure download dir
-  file: path=/opt/download state=directory
+  file:
+    path: /opt/download
+    state: directory
 
 - name: create tomcat group
-  group: name=tomcat
+  group:
+    name: tomcat
 
 - name: create tomcat user
-  user: name=tomcat group=tomcat createhome=no shell=/bin/bash
+  user:
+    name: tomcat
+    group: tomcat
+    createhome: no
+    shell: /bin/bash
 
 ### Tomcat tarball をダウンロードする
 - name: download tomcat
@@ -17,71 +24,120 @@
 
 ### tarball を展開
 - name: unarchive tomcat
-  unarchive: src="/opt/download/{{ tomcat_tarball }}" dest=/opt copy=no owner=tomcat group=tomcat creates="/opt/{{ tomcat_basename }}"
+  unarchive:
+    src: "/opt/download/{{ tomcat_tarball }}"
+    dest: /opt
+    copy: no
+    owner: tomcat
+    group: tomcat
+    creates: "/opt/{{ tomcat_basename }}"
   environment:
     LC_ALL: "C"
 
 - name: symlink tomcat
-  file: src="/opt/{{ tomcat_basename }}" dest=/opt/tomcat state=link force=yes
+  file:
+    src: "/opt/{{ tomcat_basename }}"
+    dest: /opt/tomcat
+    state: link
+    force: yes
 
 ### webapps ディレクトリを作成し、シンボリックリンクを張る
 - name: create webapps dir
-  file: path=/var/lib/tomcat/webapps state=directory owner=tomcat group=tomcat
+  file:
+    path: /var/lib/tomcat/webapps
+    state: directory
+    owner: tomcat
+    group: tomcat
 
 - name: stat webapps dir
-  stat: path=/opt/tomcat/webapps
+  stat:
+    path: /opt/tomcat/webapps
   register: st
 
 - name: delete old webapps dir
-  file: path=/opt/tomcat/webapps state=absent
+  file:
+    path: /opt/tomcat/webapps
+    state: absent
   when: st.stat.isdir == True
 
 - name: symlink webapps dir
-  file: src=/var/lib/tomcat/webapps dest=/opt/tomcat/webapps state=link
+  file:
+    src: /var/lib/tomcat/webapps
+    dest: /opt/tomcat/webapps
+    state: link
 
 - name: create webapps/ROOT dir
-  file: path=/var/lib/tomcat/webapps/ROOT state=directory
+  file:
+    path: /var/lib/tomcat/webapps/ROOT
+    state: directory
 
 - name: create healthcheck.html (for healthcheck)
-  copy: src=healthcheck.html dest=/var/lib/tomcat/webapps/ROOT/healthcheck.html
+  copy:
+    src: healthcheck.html
+    dest: /var/lib/tomcat/webapps/ROOT/healthcheck.html
 
 ### log ディレクトリを作成し、シンボリックリンクを張る
 - name: create log dir
-  file: path=/var/log/tomcat state=directory owner=tomcat group=tomcat
+  file:
+    path: /var/log/tomcat
+    state: directory
+    owner: tomcat
+    group: tomcat
 
 - name: stat logs dir
-  stat: path=/opt/tomcat/logs
+  stat:
+    path: /opt/tomcat/logs
   register: st
 
 - name: delete old logs dir
-  file: path=/opt/tomcat/logs state=absent
+  file:
+    path: /opt/tomcat/logs
+    state: absent
   when: st.stat.isdir == True
 
 - name: symlink log dir
-  file: src=/var/log/tomcat dest=/opt/tomcat/logs state=link
+  file:
+    src: /var/log/tomcat
+    dest: /opt/tomcat/logs
+    state: link
 
 ### 設定ファイル類のインストール
 - name: install server config
-  template: src={{ item }}.j2 dest=/opt/tomcat/conf/{{ item }} owner=tomcat group=tomcat mode=0644
+  template:
+    src: "{{ item }}.j2"
+    dest: /opt/tomcat/conf/{{ item }}
+    owner: tomcat
+    group: tomcat
+    mode: 0644
   with_items:
     - server.xml
     - context.xml
   notify: restart_tomcat
 
 - name: install logrotate config
-  template: src=tomcat-logrotate.j2 dest=/etc/logrotate.d/tomcat mode=0644
+  template:
+    src: tomcat-logrotate.j2
+    dest: /etc/logrotate.d/tomcat
+    mode: 0644
 
 # systemctl サービスの有効化
 - name: add tomcat service file
-  template: src=tomcat.service.j2 dest=/etc/systemd/system/tomcat.service
+  template:
+    src: tomcat.service.j2
+    dest: /etc/systemd/system/tomcat.service
   notify: restart_tomcat
 
 - name: add tomcat env file
-  template: src=tomcat-env.j2 dest=/etc/sysconfig/tomcat
+  template:
+    src: tomcat-env.j2
+    dest: /etc/sysconfig/tomcat
   notify: restart_tomcat
 
 - name: reload systemd
   command: systemctl daemon-reload
 
 - name: enable/start tomcat
-  service: name=tomcat state=started enabled=yes
+  service:
+    name: tomcat
+    state: started
+    enabled: yes

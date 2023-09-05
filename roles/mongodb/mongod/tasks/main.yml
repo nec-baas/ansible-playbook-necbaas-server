@@ -1,15 +1,22 @@
 ---
 - name: install mongod
-  yum: name={{ item }}
+  yum:
+    name: "{{ item }}"
   with_items:
     - "mongodb-org-server"
 
 - name: install mongod config
-  template: src=mongod.conf.j2 dest=/etc/mongod.conf mode=0644
+  template:
+    src: mongod.conf.j2
+    dest: /etc/mongod.conf
+    mode: 0644
   notify: restart_mongod
 
 - name: start mongod
-  service: name=mongod state=started enabled=yes
+  service:
+    name: mongod
+    state: started
+    enabled: yes
 
 # 管理ユーザ(root権限)を追加する。
 # 本手順は一旦認証なしの状態で実行する必要がある。
@@ -17,7 +24,11 @@
 # 注: 認証を使わない場合でも、ユーザ追加は実施する
 #
 - name: setup admin user
-  mongodb_user: database=admin name={{ mongodb_admin_user }} password={{ mongodb_admin_password }} roles=root
+  mongodb_user:
+    database: admin
+    name: "{{ mongodb_admin_user }}"
+    password: "{{ mongodb_admin_password }}"
+    roles: root
   failed_when: false
   when: mongodb_admin_user != ""
 

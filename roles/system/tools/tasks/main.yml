@@ -1,10 +1,15 @@
 ---
 - name: ensure install wget
-  yum: name=wget state=present
+  yum:
+    name: wget
+    state: present
 
 # 高速ダウンロードツール
 - name: install aria2
-  yum: name=aria2 enablerepo=epel state=present
+  yum:
+    name: aria2
+    enablerepo: epel
+    state: present
 
 # python-setuptools をインストールする
 # ディストリビューション付属の python-setuptools は古いため、最新版を入れる
