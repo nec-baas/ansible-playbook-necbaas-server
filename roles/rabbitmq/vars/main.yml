@@ -1,12 +1,12 @@
 ---
-# RabbitMQ RPM ファイル名
-rabbitmq_rpm: rabbitmq-server-{{ rabbitmq_version_full }}.el7.noarch.rpm
+# RabbitMQ RPM ファイル名 (RHEL7)
+rabbitmq_rpm: rabbitmq-server-{{ rabbitmq_version_full }}.el{{ ansible_distribution_major_version }}.noarch.rpm
 
 # Rabbit MQ RPM URL
-rabbitmq_rpm_url: https://dl.bintray.com/rabbitmq/all/rabbitmq-server/{{ rabbitmq_version }}/{{ rabbitmq_rpm }}
+rabbitmq_rpm_url: https://github.com/rabbitmq/rabbitmq-server/releases/download/v{{ rabbitmq_version }}/{{ rabbitmq_rpm }}
 
 # Erlang RPM (RHEL7)
-rabbitmq_erlang_rpm: erlang-{{ rabbitmq_erlang_version_full }}.el7.x86_64.rpm
+rabbitmq_erlang_rpm: erlang-{{ rabbitmq_erlang_version_full }}.el{{ ansible_distribution_major_version }}.x86_64.rpm
 rabbitmq_erlang_rpm_url: https://github.com/rabbitmq/erlang-rpm/releases/download/v{{ rabbitmq_erlang_version }}/{{ rabbitmq_erlang_rpm }}
 
 local_download: false
