@@ -6,19 +6,27 @@ NECモバイルバックエンド基盤サーバをセットアップする Ansi
 
 
 ターゲットホスト
+- RHEL 8 (x64) または AlmaLinux 8 (x64)
 - RHEL 7 (x64) または CentOS 7 (x64)
 - Amazon Linux 2 (x64)
 
-制御ホスト(Ansible を実行するホスト): Ansible 2.0 以上
+制御ホスト(Ansible を実行するホスト): Ansible 6.0 以上
 
 Playbook 実行中に Internet 上のサイトから必要なソフトウェアをダウンロードするため、ターゲットホストは Internet に対して HTTP/HTTPS で通信できるようになっている必要があります。
 
 ## 事前準備
 
-制御ホスト側に Ansible 2.0 以上をインストールしてください。
+制御ホスト側に Ansible 6.0 以上をインストールしてください。
 
-- CentOS/RHEL の場合は先に EPEL をインストールし、yum install ansible でインストールしてください。
-- Ubuntu の場合は apt-get install ansible でインストールしてください。
+python3 および pip をインストールし、venv 環境を有効化してください。
+以下に例を示します。
+
+    $ python3 -m pip ~/.venv/default
+    $ source ~/.venv/default/bin/activate
+
+以下手順で ansible をインストールします。
+
+    $ pip install -r requirements.txt
 
 制御ホストからターゲットホストに同一ユーザ・パスワードなしで ssh でログインできるよう、ssh 鍵認証の設定を行ってください。
 具体的には制御ホストの ssh 公開鍵を制御ホストの ~/.ssh/authorized_keys に追記してください。
