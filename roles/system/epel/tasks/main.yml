@@ -1,6 +1,6 @@
-# epel-releaseの更新(CentOS)
-- name: Install epel-release repository configuration (CentOS)
+# epel-releaseの更新
+- name: Install epel-release repository configuration
   yum:
-    name: "https://ftp.yz.yamagata-u.ac.jp/pub/linux/fedora-projects/epel/epel-release-latest-7.noarch.rpm"
+    name: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
+    disable_gpg_check: true
     state: present
-
